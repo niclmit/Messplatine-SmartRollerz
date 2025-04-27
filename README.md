@@ -5,7 +5,7 @@
 
 Dies ist ein **Studierendenprojekt** im Rahmen der Entwicklung eines **autonom fahrenden Fahrzeugs**. Die Messplatine spielt eine wichtige Rolle in diesem System, da sie die präzise Messung und Überwachung von Fahrzeugdaten ermöglicht.
 
-In diesem Repository findest du alle relevanten Dateien und Dokumente zur **Messplatine**. Der Code umfasst mehrere Teile, die für die Kommunikation und Datenerfassung verantwortlich sind, jedoch ist das Projekt derzeit **nicht kompiliert** oder vollständig ausführbar, da wichtige Komponenten des Gesamtprojekts noch fehlen.
+In diesem Repository findest du alle relevanten Dateien zur **Messplatine**. Der Code umfasst mehrere Teile, die für die Kommunikation und Datenerfassung verantwortlich sind, jedoch ist das Projekt derzeit **nicht kompiliert** oder vollständig ausführbar, da wichtige Komponenten des Gesamtprojekts fehlen.
 
 ### Projektstruktur:
 - Der **common**-Ordner enthält die Treiber für die unterschiedlichen Schnittstellen wie **I2C**, **UART** und **GPIO**.
