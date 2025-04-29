@@ -377,46 +377,46 @@ auto pwm_uart_task(common::task::parameters parameters) -> void{
         const uint64_t timeout = 1000000;
         PwmData pwm_data;
         write_package<antenna_type::start>(uart, true);
-        // if (xQueueReceive(pwm_queue, &(pwm_data), portMAX_DELAY) == pdPASS) {
-        //     // UART senden (ohne Blockierung!)
-        //     last_pwm_value = esp_timer_get_time(); // Aktueller Zeitstempel
+        if (xQueueReceive(pwm_queue, &(pwm_data), portMAX_DELAY) == pdPASS) {
+            // UART senden (ohne Blockierung!)
+            last_pwm_value = esp_timer_get_time(); // Aktueller Zeitstempel
             
 
             
-        //     if(pwm_data.pulse_width > 1800 && pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::SWITCH_A) /*&& last_rc_mode == false*/) {
-        //         write_package<antenna_type::start>(uart, true); // Beispielwert für Start-Paket
-        //         RC_MODE_LED.set_level(common::drivers::gpio::level::high);
-        //         last_rc_mode = true;
-        //     } else if(pwm_data.pulse_width < 1200 && pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::SWITCH_A) /*&& last_rc_mode == true*/) {
-        //         write_package<antenna_type::stop>(uart, true); // Beispielwert für Start-Paket
-        //         RC_MODE_LED.set_level(common::drivers::gpio::level::low);
-        //         last_rc_mode = false;
-        //     }
-        //     if(pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::RIGHT_STICK_X)) {
-        //         // write_package<antenna_type::speed>(uart, pwm_data.pulse_width); // Beispielwert für Steuerung-Paket
-        //     }
-        //     if(pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::LEFT_STICK_Y)) {
-        //         uint64_t mapped_value = map_to_range(pwm_data.pulse_width, 1000, 2000); // Beispielwerte für min und max
-        //         // write_package<antenna_type::steering>(uart, mapped_value); // Beispielwert für Steuerung-Paket
-        //     }
+            if(pwm_data.pulse_width > 1800 && pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::SWITCH_A) /*&& last_rc_mode == false*/) {
+                write_package<antenna_type::start>(uart, true); // Beispielwert für Start-Paket
+                RC_MODE_LED.set_level(common::drivers::gpio::level::high);
+                last_rc_mode = true;
+            } else if(pwm_data.pulse_width < 1200 && pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::SWITCH_A) /*&& last_rc_mode == true*/) {
+                write_package<antenna_type::stop>(uart, true); // Beispielwert für Start-Paket
+                RC_MODE_LED.set_level(common::drivers::gpio::level::low);
+                last_rc_mode = false;
+            }
+            if(pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::RIGHT_STICK_X)) {
+                // write_package<antenna_type::speed>(uart, pwm_data.pulse_width); // Beispielwert für Steuerung-Paket
+            }
+            if(pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::LEFT_STICK_Y)) {
+                uint64_t mapped_value = map_to_range(pwm_data.pulse_width, 1000, 2000); // Beispielwerte für min und max
+                // write_package<antenna_type::steering>(uart, mapped_value); // Beispielwert für Steuerung-Paket
+            }
 
-        //     if(pwm_data.pulse_width < 1250 && pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::SWITCH_C) && last_drive_mode != 0) {
-        //         write_package<antenna_type::mode>(uart2, 0); // Beispielwert für Start-Paket
-        //     }
-        //     else if(pwm_data.pulse_width > 1750 && pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::SWITCH_C) && last_drive_mode != 1) {
-        //         write_package<antenna_type::mode>(uart2, 1); // Beispielwert für Start-Paket
-        //     }
-        //     else if (last_drive_mode != 2 && pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::SWITCH_C)){
-        //         write_package<antenna_type::mode>(uart2, 2); // Beispielwert für Start-Paket
-        //     }
+            if(pwm_data.pulse_width < 1250 && pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::SWITCH_C) && last_drive_mode != 0) {
+                write_package<antenna_type::mode>(uart2, 0); // Beispielwert für Start-Paket
+            }
+            else if(pwm_data.pulse_width > 1750 && pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::SWITCH_C) && last_drive_mode != 1) {
+                write_package<antenna_type::mode>(uart2, 1); // Beispielwert für Start-Paket
+            }
+            else if (last_drive_mode != 2 && pwm_data.callback_id == static_cast<uint8_t>(common::drivers::remote_controller::channel::SWITCH_C)){
+                write_package<antenna_type::mode>(uart2, 2); // Beispielwert für Start-Paket
+            }
 
 
 
-        //     // uint8_t mapped_value = mapTo8Bit(pwm_data.pulse_width, 1000, 2000); // Beispielwerte für min und max
-        //     // if(mapped_value < 10) mapped_value = 0; // Wenn der Wert kleiner als 100 ist, setze ihn auf 0
-        //     // print_values(mapped_value, pwm_data.callback_id);
-        //     // uart_write_bytes(UART_NUM_1, (const char*)&pwm_value, sizeof(pwm_value));
-        // }
+            // uint8_t mapped_value = mapTo8Bit(pwm_data.pulse_width, 1000, 2000); // Beispielwerte für min und max
+            // if(mapped_value < 10) mapped_value = 0; // Wenn der Wert kleiner als 100 ist, setze ihn auf 0
+            // print_values(mapped_value, pwm_data.callback_id);
+            // uart_write_bytes(UART_NUM_1, (const char*)&pwm_value, sizeof(pwm_value));
+        }
        
         using namespace common::units::literals;
         common::task::delay(100_ms);
