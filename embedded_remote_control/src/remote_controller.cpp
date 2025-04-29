@@ -168,14 +168,14 @@ namespace common::drivers::remote_controller
         gpio_interrupt gpio_interrupt_switch_g(CH11_PIN_SWITCH_G);
     
         // 3. Callback-Funktion anhängen
-        // gpio_interrupt_right_stick_x.attach(interrupt_callback_right_stick_x);
-        gpio_interrupt_right_stick_y.attach(interrupt_callback_right_stick_y);
+        gpio_interrupt_right_stick_x.attach(interrupt_callback_right_stick_x);
+        // gpio_interrupt_right_stick_y.attach(interrupt_callback_right_stick_y);
         // gpio_interrupt_left_stick_x.attach(interrupt_callback_left_stick_x);
-        // gpio_interrupt_left_stick_y.attach(interrupt_callback_left_stick_y);
-        // gpio_interrupt_switch_a.attach(interrupt_callback_switch_a);
+        gpio_interrupt_left_stick_y.attach(interrupt_callback_left_stick_y);
+        gpio_interrupt_switch_a.attach(interrupt_callback_switch_a);
         // gpio_interrupt_switch_b.attach(interrupt_callback_switch_b);
-        // gpio_interrupt_switch_c.attach(interrupt_callback_switch_c);
-        gpio_interrupt_switch_d.attach(interrupt_callback_switch_d);
+        gpio_interrupt_switch_c.attach(interrupt_callback_switch_c);
+        // gpio_interrupt_switch_d.attach(interrupt_callback_switch_d);
         // gpio_interrupt_switch_e.attach(interrupt_callback_switch_e);
         // gpio_interrupt_switch_f.attach(interrupt_callback_switch_f);
         // gpio_interrupt_switch_g.attach(interrupt_callback_switch_g);

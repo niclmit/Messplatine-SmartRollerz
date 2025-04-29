@@ -16,6 +16,7 @@
 
 QueueHandle_t pwm_queue = NULL; // Queue für PWM-Werte
 
+common::drivers::gpio ON_PIN(GPIO_NUM_47, GPIO_MODE_OUTPUT, GPIO_PULLUP_DISABLE, GPIO_PULLDOWN_DISABLE, GPIO_INTR_DISABLE);
 
 
 extern "C" void app_main() {
@@ -24,13 +25,12 @@ extern "C" void app_main() {
         printf("Fehler: Queue konnte nicht erstellt werden!\n");
         return;
     }
-    
     ON_PIN.set_level(common::drivers::gpio::level::low);
 
     using namespace common::units::literals;
     common::task::create("pwm_uart_task", &pwm_uart_task, 16_KiByte, common::task::priority::high, nullptr, 1);
     // common::task::create("read_temp_task", &read_temp_task, 16_KiByte, common::task::priority::low, nullptr, 0);
-    common::task::create("read_i2c_sensors_task", &read_i2c_sensors_task, 16_KiByte, common::task::priority::low, nullptr, 0);
+    // common::task::create("read_i2c_sensors_task", &read_i2c_sensors_task, 16_KiByte, common::task::priority::low, nullptr, 0);
 
 
     while(true){
